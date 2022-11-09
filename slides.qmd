@@ -4,7 +4,7 @@ author: "Mandy Norrbo ([@MandyNorrbo](https://twitter.com/MandyNorrbo))"
 format:
   revealjs:
     theme: [default, custom.scss]
-    logo: logo.svg
+    logo: img/logo.svg
     css: custom.scss
     echo: true
     preview-links: true
