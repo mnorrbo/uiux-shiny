@@ -119,8 +119,8 @@ ehthumbs_vista.db
 
 ## Quarto
 
-slides_cache
-slides_files
+index_cache
+index_files
 
 /.quarto/
 
