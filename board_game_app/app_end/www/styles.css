@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Poppins:wght@600&display=swap');
+
+:root {
+  --bg-secondary: #f5f2f2;
+}
+
+body {
+  background-color: #fff;
+  color: #262626;
+  font-size: 15px;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+  top: 0;
+  left: 0;
+  font-family: 'Nabla', cursive;
+  background-color: #262626;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 35px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+/* sidebar */
+#inputs {
+  background-color: var(--bg-secondary);
+}
+
+#inputs .well {
+  background-color: var(--bg-secondary);
+}
+
+#search {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #18731c;
+  color: #fff;
+}
+
+#more_options {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #262626;
+  color: #fff;
+}
+
+/* details (mins, players...) */
+.auto-fit {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.main-detail {
+  grid-template-columns: repeat(auto-fit, minmax(50px, 100px)); 
+}
+
+.secondary-detail {
+  grid-template-columns: repeat(auto-fit, minmax(50px, 70px));
+}
+
+.main-detail p {
+  background-color: var(--bg-secondary);
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.secondary-detail p {
+  background-color: var(--bg-secondary);
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* main panel */
+#rec-title {
+  display: grid;
+  grid-template-columns: 76px calc(100% - 64px);
+}
+
+#game-description {
+  background-color: var(--bg-secondary);
+  padding: 16px;
+}
+
+.container-fluid {
+  margin-bottom: 50px;
+}
+
+.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
+  background-color: #262626;
+  color: #fff;
+  font-size: 11px;
+}
+
+.irs--shiny .irs-bar {
+  border-top: #262626;
+  border-bottom: #262626;
+  background: #262626;
+}
+
+.irs-grid-text {
+  font-size: 10px;
+}
