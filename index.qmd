@@ -700,4 +700,6 @@ Less is More
 
   - **LinkedIn:** Mandy Norrbo
 
+  - **GitHub:** mnorrbo
+
   - **Email:** mandy@jumpingrivers.com
