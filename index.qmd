@@ -22,9 +22,6 @@ format:
   - R & Shiny development for clients in a variety of fields
   
   - Teach beginner & advanced R programming courses
-  
-  - We offer an introductory Shiny course
-    - jumpingrivers.com/training
 
 :::
 
@@ -43,7 +40,6 @@ format:
 - R framework for creating web apps
 - An app consists of UI (front end) and server (back end)
 - Mainly used by data professionals to build dashboards
-  - Usage becoming more widespread and more varied
   - Entry point into web development
 
 :::
@@ -116,6 +112,10 @@ format:
 
 - Can inspect the underlying web technologies using the Developer Tools in browser
 
+::: {.notes}
+JavaScript allows webpages to respond to user activity and dynamically update themselves
+:::
+
 ## 🔧 Demo: A simple Shiny app 🔧
 
 - App that prints a random US state when you click a button
@@ -139,6 +139,8 @@ shinyApp(ui, server)
 
 - Let's look at HTML/CSS/JavaScript in Developer Tools
 
+# With that out the way...
+
 ## UI/UX design principles
 
 
@@ -148,6 +150,8 @@ shinyApp(ui, server)
 1. Responsive design 📱
 1. Hierarchy and Chronology 📑
 1. Less is More 🤏
+
+- Let's see how many of these we can cover today
 
 # 1. Accessibility
 
@@ -536,6 +540,10 @@ Responsive Design
 - Avoid hard coding widths and heights in centimetres or inches
   - Instead use relative units e.g. percentages
 
+<center>
+![](img/fluidpage.gif){width="50%"}
+</center>
+
 ::: {.footer .topic-footer}
 Responsive Design
 :::
@@ -568,6 +576,10 @@ Responsive Design
 
 1. Try out different screen sizes in developer tools
 
+<center>
+![](img/responsive.png){width="80%"}
+</center>
+
 ::: {.footer .topic-footer}
 Responsive Design
 :::
@@ -576,9 +588,9 @@ Responsive Design
 
 ## Structuring your content
 
-- Visual hierarchy is the order in which the user process information by importance
-  - With the correct use of hierarchy, the mind can group and prioritize elements to give them a specific order
-  - If not placed through a correct hierarchy, generate disorder and greater effort in navigation
+- Visual hierarchy allows the user to process information by importance
+  - The mind can group and prioritise elements to give them a specific order
+  - If no hierarchy, much greater effort in navigation
 
 ::: {.footer .topic-footer}
 Hierarchy and Chronology
@@ -592,7 +604,7 @@ Hierarchy and Chronology
 Hierarchy and Chronology
 :::
   
-## Components to create hierarchy
+## How to create hierarchy
 
 - **Size** ➕: The larger the element, the more it will attract attention
 - **Colour** 🎨: Bright colours stand out more than muted tones
@@ -630,11 +642,11 @@ Hierarchy and Chronology
 
 # 6. Less is More
 
-## Reduce complexity
+## Reduce complexity 🧘
 
-- As you're learning about a bunch of cool packages and features that you can add to your Shiny app, it's easy to overdo it and end up adding features *just because*
+- As you're learning about cool packages in Shiny, it's easy to add features *just because*
 - The more you add, the more difficult your app will be to interact with for the user (**increased cognitive load**)
-  - It may also slow down your app significantly!
+  - It may also slow down the app itself!
   
 ::: {.footer .topic-footer}
 Less is More
@@ -644,7 +656,7 @@ Less is More
 
 - What is essential for the usage of your app?
   - Make sure it is easy to perform those basic actions, before adding any other features
-  - You can use hierarchy/chronology to emphasise that basic user journey
+    - You can use hierarchy/chronology to emphasise that basic user journey
   
 ::: {.footer .topic-footer}
 Less is More
@@ -664,7 +676,11 @@ Less is More
 
 ## 🔧 Demo: Board game app 🔧
 
-1. Add min. age input into "+ More filters"
+1. Add min. age input into "+ More options"
+
+<center>
+![](img/more_options.png){width="50%"}
+</center>
 
 ::: {.footer .topic-footer}
 Less is More
@@ -672,7 +688,7 @@ Less is More
 
 ## This all seems too much!
 
-- I wouldn't worry about meeting all these principles from the get go
+- Don't worry about meeting all these principles from the get go
 
 - Development is an iterative process, and you can always keep improving your app 
 

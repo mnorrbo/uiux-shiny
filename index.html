@@ -403,10 +403,6 @@
 <ul>
 <li><p>R &amp; Shiny development for clients in a variety of fields</p></li>
 <li><p>Teach beginner &amp; advanced R programming courses</p></li>
-<li><p>We offer an introductory Shiny course</p>
-<ul>
-<li>jumpingrivers.com/training</li>
-</ul></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -423,7 +419,6 @@
 <li>An app consists of UI (front end) and server (back end)</li>
 <li>Mainly used by data professionals to build dashboards
 <ul>
-<li>Usage becoming more widespread and more varied</li>
 <li>Entry point into web development</li>
 </ul></li>
 </ul>
@@ -495,6 +490,19 @@
 <li><p>Shiny generates HTML, CSS, and JavaScript for you</p></li>
 <li><p>Can inspect the underlying web technologies using the Developer Tools in browser</p></li>
 </ul>
+<aside class="notes">
+<p>JavaScript allows webpages to respond to user activity and dynamically update themselves</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="demo-a-simple-shiny-app" class="slide level2">
 <h2>🔧 Demo: A simple Shiny app 🔧</h2>
@@ -520,6 +528,11 @@
 <li>Let’s look at HTML/CSS/JavaScript in Developer Tools</li>
 </ul>
 </section>
+<section>
+<section id="with-that-out-the-way" class="title-slide slide level1 center">
+<h1>With that out the way…</h1>
+
+</section>
 <section id="uiux-design-principles" class="slide level2">
 <h2>UI/UX design principles</h2>
 <ol type="1">
@@ -530,7 +543,10 @@
 <li>Hierarchy and Chronology 📑</li>
 <li>Less is More 🤏</li>
 </ol>
-</section>
+<ul>
+<li>Let’s see how many of these we can cover today</li>
+</ul>
+</section></section>
 <section>
 <section id="accessibility" class="title-slide slide level1 center">
 <h1>1. Accessibility</h1>
@@ -933,6 +949,9 @@
 <li>Instead use relative units e.g.&nbsp;percentages</li>
 </ul></li>
 </ul>
+<center>
+<img data-src="img/fluidpage.gif" style="width:50.0%">
+</center>
 <div class="footer topic-footer">
 <p>Responsive Design</p>
 </div>
@@ -956,6 +975,9 @@
 <ol type="1">
 <li>Try out different screen sizes in developer tools</li>
 </ol>
+<center>
+<img data-src="img/responsive.png" style="width:80.0%">
+</center>
 <div class="footer topic-footer">
 <p>Responsive Design</p>
 </div>
@@ -968,10 +990,10 @@
 <section id="structuring-your-content" class="slide level2">
 <h2>Structuring your content</h2>
 <ul>
-<li>Visual hierarchy is the order in which the user process information by importance
+<li>Visual hierarchy allows the user to process information by importance
 <ul>
-<li>With the correct use of hierarchy, the mind can group and prioritize elements to give them a specific order</li>
-<li>If not placed through a correct hierarchy, generate disorder and greater effort in navigation</li>
+<li>The mind can group and prioritise elements to give them a specific order</li>
+<li>If no hierarchy, much greater effort in navigation</li>
 </ul></li>
 </ul>
 <div class="footer topic-footer">
@@ -985,8 +1007,8 @@
 <p>Hierarchy and Chronology</p>
 </div>
 </section>
-<section id="components-to-create-hierarchy" class="slide level2">
-<h2>Components to create hierarchy</h2>
+<section id="how-to-create-hierarchy" class="slide level2">
+<h2>How to create hierarchy</h2>
 <ul>
 <li><strong>Size</strong> ➕: The larger the element, the more it will attract attention</li>
 <li><strong>Colour</strong> 🎨: Bright colours stand out more than muted tones</li>
@@ -1030,12 +1052,12 @@
 
 </section>
 <section id="reduce-complexity" class="slide level2">
-<h2>Reduce complexity</h2>
+<h2>Reduce complexity 🧘</h2>
 <ul>
-<li>As you’re learning about a bunch of cool packages and features that you can add to your Shiny app, it’s easy to overdo it and end up adding features <em>just because</em></li>
+<li>As you’re learning about cool packages in Shiny, it’s easy to add features <em>just because</em></li>
 <li>The more you add, the more difficult your app will be to interact with for the user (<strong>increased cognitive load</strong>)
 <ul>
-<li>It may also slow down your app significantly!</li>
+<li>It may also slow down the app itself!</li>
 </ul></li>
 </ul>
 <div class="footer topic-footer">
@@ -1047,8 +1069,10 @@
 <ul>
 <li>What is essential for the usage of your app?
 <ul>
-<li>Make sure it is easy to perform those basic actions, before adding any other features</li>
+<li>Make sure it is easy to perform those basic actions, before adding any other features
+<ul>
 <li>You can use hierarchy/chronology to emphasise that basic user journey</li>
+</ul></li>
 </ul></li>
 </ul>
 <div class="footer topic-footer">
@@ -1074,8 +1098,11 @@
 <section id="demo-board-game-app-5" class="slide level2">
 <h2>🔧 Demo: Board game app 🔧</h2>
 <ol type="1">
-<li>Add min. age input into “+ More filters”</li>
+<li>Add min. age input into “+ More options”</li>
 </ol>
+<center>
+<img data-src="img/more_options.png" style="width:50.0%">
+</center>
 <div class="footer topic-footer">
 <p>Less is More</p>
 </div>
@@ -1083,7 +1110,7 @@
 <section id="this-all-seems-too-much" class="slide level2">
 <h2>This all seems too much!</h2>
 <ul>
-<li><p>I wouldn’t worry about meeting all these principles from the get go</p></li>
+<li><p>Don’t worry about meeting all these principles from the get go</p></li>
 <li><p>Development is an iterative process, and you can always keep improving your app</p></li>
 <li><p>Also, to even worry about user interface and user experience, <em>you will need to have users first</em></p></li>
 </ul>
