@@ -14,7 +14,7 @@ format:
 
 :::: {.columns}
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 - Background in Psychology
 
 - Data scientist @ Jumping Rivers
@@ -25,7 +25,7 @@ format:
 
 :::
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 ![](img/mandy.png)
 :::
 
