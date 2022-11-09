@@ -1,0 +1,687 @@
+---
+title: "✨ An Introduction to UI/UX in Shiny✨"  
+author: "Mandy Norrbo ([@MandyNorrbo](https://twitter.com/MandyNorrbo))"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    logo: logo.svg
+    css: custom.scss
+    echo: true
+    preview-links: true
+---
+
+## Who am I?
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- Background in Psychology
+
+- Data scientist @ Jumping Rivers
+
+  - R & Shiny development for clients in a variety of fields
+  
+  - Teach beginner & advanced R programming courses
+  
+  - We offer an introductory Shiny course
+    - jumpingrivers.com/training
+
+:::
+
+::: {.column width="40%"}
+![](img/mandy.png)
+:::
+
+::::
+
+
+## What is Shiny?
+
+:::: {.columns}
+
+::: {.column width="70%"}
+- R framework for creating web apps
+- An app consists of UI (front end) and server (back end)
+- Mainly used by data professionals to build dashboards
+  - Usage becoming more widespread and more varied
+  - Entry point into web development
+
+:::
+
+::: {.column width="30%"}
+![](img/shiny.png)
+:::
+
+::::
+
+  
+  
+
+[Examples of Shiny apps](https://shiny.rstudio.com/gallery/#user-showcase)
+  
+## What is UI/UX?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### User *Interface* 🎨
+  - Visual design
+    - Colours, fonts, layouts, images
+
+:::
+
+::: {.column width="50%"}
+### User *Experience* 🖱
+  - Interaction design
+    - Usability, accessiblity, user research & testing
+
+:::
+
+::::
+
+
+
+- Difficult to separate as they both feed into each other
+
+- Large fields in their own right
+  - I will try to cover some basic principles within the context of Shiny apps
+  
+::: {.notes}
+- You can't design the colors, fonts, layouts, without thinking about a user interacting with them
+- Equally, you can't design the user experiencing without thinking about what the visual content they will interact with looks like
+:::
+  
+## Web basics: front end
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- HTML: **structure**
+
+- CSS: **style**
+
+- JavaScript: **interactivity**
+:::
+
+::: {.column width="50%"}
+![](img/html_css_js.png)
+
+:::
+
+::::
+  
+
+- Shiny generates HTML, CSS, and JavaScript for you
+
+- Can inspect the underlying web technologies using the Developer Tools in browser
+
+## 🔧 Demo: A simple Shiny app 🔧
+
+- App that prints a random US state when you click a button
+
+```{r}
+#| eval: false
+library("shiny")
+ui = fluidPage(
+  actionButton("click", label = "Click me!"),
+  textOutput("state")
+)
+
+server = function(input, output, session) {
+  output$state = renderText(
+    sample(state.name, 1)
+  ) |>
+    bindEvent(input$click)
+}
+shinyApp(ui, server)
+```
+
+- Let's look at HTML/CSS/JavaScript in Developer Tools
+
+## UI/UX design principles
+
+
+1. Accessibility 🫂
+1. Feedback to the User ✅
+1. Help and Documentation 📜
+1. Responsive design 📱
+1. Hierarchy and Chronology 📑
+1. Less is More 🤏
+
+# 1. Accessibility
+
+## Accessiblity on the web
+
+- Ensuring there are **no barriers that prevent interaction with or access to the content** of your app
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Potential barriers:
+  - Dyslexia, colorblindness, visual or hearing impairments, motor or cognitive impairments and more
+:::
+
+::: {.column width="50%"}
+- You can improve:
+  - Contrast, colour palettes, font sizes, screen reader compatibility, alternative text, not relying on mouse inputs, transcripts for audio, semantic HTML
+:::
+
+::::
+
+::: {.footer .topic-footer}
+Accessibility
+:::
+
+## Available guidelines & tool
+
+- [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/TR/WCAG20/)
+  - Currently WCAG 2, WCAG 3 is in progress
+
+- [A11Y](https://www.a11yproject.com/)
+  - Community-driven effort to make digital accessiblity easier
+  
+- Lighthouse report in Chrome Developer Tools
+
+- WAVE evaluation browser extension
+
+::: {.footer .topic-footer}
+Accessibility
+:::
+
+## 🔧 Demo: Accessibility tools 🔧
+
+![](img/wave.png){.absolute top=200 left=100 width="350" height="350"}
+
+![](img/lighthouse.svg){.absolute top=220 left=600 width="320" height="320"}
+
+
+::: {.footer .topic-footer}
+Accessibility
+:::
+
+
+::: {.notes}
+Run Lighthouse report on A11Y website, and then WCAG website
+WCAG should result in one problem, lang code being wrong for Japan
+It's set to "jp" but should be "ja"
+Correct language codes here: https://www.w3schools.com/tags/ref_language_codes.asp
+:::
+  
+
+## Accessibility in Shiny 💻
+
+- You can run browser-based reports on Shiny apps
+
+- Shiny generates HTML for you
+  - Modifying HTML directly is more difficult
+
+- `renderPlot` now has an `alt` argument for alternative text
+
+- Colors, fonts, contrast etc. can all be modified using CSS
+
+- R packages: [{shinya11y}](https://github.com/ewenme/shinya11y), [{BrailleR}](https://github.com/ajrgodfrey/BrailleR), [{sonify}](https://rdrr.io/cran/sonify/man/sonify.html), [{tactileR}](https://github.com/jooyoungseo/tactileR)
+
+::: {.footer .topic-footer}
+Accessibility
+:::
+
+## 🔧 Demo: Board game app 🔧
+
+1. Adding alt text
+
+1. Generating a Ligthouse report
+
+1. Fixing issues from Lighthouse report
+
+![](img/app_screenshot.png)
+
+::: {.footer .topic-footer}
+Accessibility
+:::
+
+::: {.notes}
+1. `tags$img(src = data$thumbnail, alt = "Board game cover")`
+
+1. Add `tags$html(lang = "en")` inside div & change color of slider label in css
+    
+```
+.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
+  background-color: #fff;
+  color: #262626;
+}
+```
+:::
+
+
+# 2. Feedback to the User
+
+## Every action has a reaction
+
+- Feedback communicates the result of any interaction
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+### Process
+- Process ongoing
+- Correct/incorrect input
+- Action has worked/failed
+- Items are clickable
+:::
+
+::: {.column width="55%"}
+### Example feedback
+- *Downloading...*
+- *Enter a valid phone number*
+- *Progress saved!*
+- Cursor and colour change
+
+
+:::
+
+::::
+
+- Also: loading spinners, tooltips, progress bars
+
+![](img/loading.gif){.absolute bottom=50 right=120 width="80" height="80"}
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+## Why important?
+
+- Lack of feedback leaves the user confused
+  - Might give up, refresh the whole page, keep clicking a button several times
+
+- Feedback needs to be both *visible* and *understandable*
+
+- Response should be *proportional* to action
+  - Small action ➜ Small response
+    - e.g. don't need to say "Button clicked!"
+
+<center>
+```{r}
+#| echo: false
+shiny::actionButton("click-me", "Click me", style = "font-size: 40px; padding: 20px;")
+```
+</center>
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+  
+## In Shiny: built-in
+
+- Buttons, links etc. already give sensible visual feedback (colour change) at clicking/hovering
+
+- If e.g. plot fails, will send through R error message
+  - Can provide custom error message with `validate()`
+
+- `showModal()` to display a pop-up modal
+
+- `withProgress()` to show progress bar
+
+- `showNotification()` to display a notification
+
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+## In Shiny: add-ons
+
+- [{shinycssloaders}](https://github.com/daattali/shinycssloaders) to add loading spinners to individual elements
+
+- [{waiter}](https://github.com/JohnCoene/waiter) to add loading screen for entire app
+
+- [{tippy}](https://github.com/JohnCoene/tippy) to add tooltip pop-up message
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+## {shinycssloaders}
+
+![](img/shinycssloaders.gif){.absolute width="70%" height="80%"}
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+
+## {waiter}
+
+![](img/waiter.gif){.absolute width="80%" height="80%"}
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+## {tippy}
+
+![](img/rclipboard_tippy.gif){.absolute width="70%" height="80%"}
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+
+## 🔧 Demo: Board game app 🔧
+
+1. Improving feedback when no games were found
+    - Should prompt user to update search criteria
+
+<center>
+![](img/error.png){width="50%"}
+</center>
+
+::: {.notes}
+
+```
+validate(
+  need(nrow(filtered()) != 0, 
+  "No board games found! Please update your filters and try again.")
+)
+```
+
+:::
+
+
+::: {.footer .topic-footer}
+Feedback to the User
+:::
+
+
+# 3. Help and Documentation
+
+## Getting help 
+
+- Users generally want to navigate a product without resorting to documentation
+
+- Any help should be **easy to locate** and **focused on the users’ current task**
+
+    - ℹ️ Where might your user get stuck?
+
+    - ℹ️ What questions might your user ask?
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+## Basics
+
+- Include a "Help" or "How to Use" tab
+
+- Provide enough context for any included visualisations
+
+- Consider who the user is, and what their knowledge of the subject/content will be
+
+- **User testing**: how does a user interact with the app
+  - If you can, get an actual end user
+  - If not, a colleague or friend might work
+  
+![](img/user_testing.png){.absolute width="25%" right="30px" bottom="80px"}
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+## In Shiny: add-ons
+
+- [{cicerone}](https://github.com/JohnCoene/cicerone) to create guided tours of Shiny applications
+
+- [{shinyhelper}](https://github.com/cwthom/shinyhelper) for adding help next to certain inputs
+
+- [{faq}](https://github.com/jienagu/faq) to create a *Frequently Asked Questions* component
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+## {cicerone}
+
+![](img/cicerone.gif){.absolute width="80%" height="80%"}
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+## {shinyhelper}
+
+![](img/shinyhelper.gif){.absolute width="100%" height="80%"}
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+## {faq}
+
+![](img/faq.gif){.absolute width="80%" height="80%"}
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+## 🔧 Demo: Board game app 🔧
+
+1. Adding {shinyhelper} help at "min. age input"
+
+<center>
+![](img/min_age.png){width="40%"}
+</center>
+
+::: {.footer .topic-footer}
+Help and Documentation
+:::
+
+::: {.notes}
+``` 
+%>% helper(type = "inline",
+                      title = "Minimum age",
+                      content = c("Show only games that are suitable for someone who is x years old.",
+                                  "Default min. age is 25, which includes all board games"))
+```
+
+:::
+
+
+# 4. Responsive Design
+
+## What is responsive design? 🖥️️💻️📱
+
+- Responsive web design is about creating web pages that look good **on all devices**
+
+- Users might be accessing your app with a **laptop**, a **tablet**, or their **phone**
+
+- A responsive web design will **automatically adjust** for different screen sizes and viewports
+
+::: {.footer .topic-footer}
+Responsive Design
+:::
+
+
+## Guidelines and tools
+
+:::: {.columns}
+
+
+::: {.column width="45%"}
+- Developer tools allow you to view your web page with different dimensions and even specific devices
+  - You can also try rotating the screen (as if you were rotating your phone screen) and zooming in on the device as well as use "touch screen"
+:::
+
+::: {.column width="10%"}
+
+
+:::
+
+::: {.column width="45%"}
+![](img/screen_sizes.gif)
+:::
+
+:::
+
+::: {.footer .topic-footer}
+Responsive Design
+:::
+
+## Shiny and responsive design
+
+- Default layout `fluidPage` should resize with window
+
+- Avoid hard coding widths and heights in centimetres or inches
+  - Instead use relative units e.g. percentages
+
+::: {.footer .topic-footer}
+Responsive Design
+:::
+
+## Mobile compatibility in Shiny
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+[{shinyMobile}](https://rinterface.github.io/shinyMobile/)
+![](img/shinymobile.gif){.absolute width=25%}
+:::
+
+::: {.column width=50%}
+
+[{miniUI}](https://github.com/rstudio/miniUI)
+
+![](img/mini_ui.gif){.absolte width=51%}
+
+:::
+::::
+
+
+::: {.footer .topic-footer}
+Responsive Design
+:::
+
+## 🔧 Demo: Board game app 🔧
+
+1. Try out different screen sizes in developer tools
+
+::: {.footer .topic-footer}
+Responsive Design
+:::
+
+# 5. Hierarchy and Chronology
+
+## Structuring your content
+
+- Visual hierarchy is the order in which the user process information by importance
+  - With the correct use of hierarchy, the mind can group and prioritize elements to give them a specific order
+  - If not placed through a correct hierarchy, generate disorder and greater effort in navigation
+
+::: {.footer .topic-footer}
+Hierarchy and Chronology
+:::
+
+## Where to look? 👀
+
+![](img/bad_landing_page.png)
+
+::: {.footer .topic-footer}
+Hierarchy and Chronology
+:::
+  
+## Components to create hierarchy
+
+- **Size** ➕: The larger the element, the more it will attract attention
+- **Colour** 🎨: Bright colours stand out more than muted tones
+- **Alignment**️ 📏: Any element that separates from the alignment of the others will attract attention
+- **Negative space** ⬜: The more space around the element, the more attention it generates
+
+::: {.footer .topic-footer}
+Hierarchy and Chronology
+:::
+
+## In Shiny
+
+- Use h1-h5 headings effectively
+- Structuring your content into sections/tabs to avoid all content on a single page
+    - e.g. `navBarPage()`
+- Highlighting important outputs/inputs with size/color/position, and placing less important elements to the side/hidden unless requested
+
+![](img/navbarpage.gif){.absolute right="160px" top="230px" width="35%"}
+
+::: {.footer .topic-footer}
+Hierarchy and Chronology
+:::
+
+## 🔧 Demo: Board game app 🔧
+
+1. Distinguish the "Find board game" button from the "+ More options" button using size/colour
+
+<center>
+![](img/buttons.png){width="30%"}
+</center>
+
+::: {.footer .topic-footer}
+Hierarchy and Chronology
+:::
+
+# 6. Less is More
+
+## Reduce complexity
+
+- As you're learning about a bunch of cool packages and features that you can add to your Shiny app, it's easy to overdo it and end up adding features *just because*
+- The more you add, the more difficult your app will be to interact with for the user (**increased cognitive load**)
+  - It may also slow down your app significantly!
+  
+::: {.footer .topic-footer}
+Less is More
+:::
+
+## Keep only what's essential
+
+- What is essential for the usage of your app?
+  - Make sure it is easy to perform those basic actions, before adding any other features
+  - You can use hierarchy/chronology to emphasise that basic user journey
+  
+::: {.footer .topic-footer}
+Less is More
+:::
+
+## In Shiny
+
+- Avoid unnecessary interactivity
+  - e.g. only use {plotly} when there's a reason to
+  
+- Hide "advanced" inputs not necessary for basic use
+  - e.g. extra filters when searching for a hotel room
+
+::: {.footer .topic-footer}
+Less is More
+:::
+
+## 🔧 Demo: Board game app 🔧
+
+1. Add min. age input into "+ More filters"
+
+::: {.footer .topic-footer}
+Less is More
+:::
+
+## This all seems too much!
+
+- I wouldn't worry about meeting all these principles from the get go
+
+- Development is an iterative process, and you can always keep improving your app 
+
+- Also, to even worry about user interface and user experience, *you will need to have users first*
+
+# Thank you! 🌻
+
+  - **Twitter:** @MandyNorrbo
+
+  - **LinkedIn:** Mandy Norrbo
+
+  - **Email:** mandy@jumpingrivers.com

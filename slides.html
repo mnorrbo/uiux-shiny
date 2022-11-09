@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.163">
+
+  <meta name="author" content="Mandy Norrbo (@MandyNorrbo)">
+  <title>✨ An Introduction to UI/UX in Shiny✨</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="custom.scss">
+  <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">✨ An Introduction to UI/UX in Shiny✨</h1>
+  <p class="author">Mandy Norrbo (<a href="https://twitter.com/MandyNorrbo"><span class="citation" data-cites="MandyNorrbo">@MandyNorrbo</span></a>)</p>
+</section>
+
+<section id="who-am-i" class="slide level2">
+<h2>Who am I?</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><p>Background in Psychology</p></li>
+<li><p>Data scientist @ Jumping Rivers</p>
+<ul>
+<li><p>R &amp; Shiny development for clients in a variety of fields</p></li>
+<li><p>Teach beginner &amp; advanced R programming courses</p></li>
+<li><p>We offer an introductory Shiny course</p>
+<ul>
+<li>jumpingrivers.com/training</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="img/mandy.png"></p>
+</div>
+</div>
+</section>
+<section id="what-is-shiny" class="slide level2">
+<h2>What is Shiny?</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li>R framework for creating web apps</li>
+<li>An app consists of UI (front end) and server (back end)</li>
+<li>Mainly used by data professionals to build dashboards
+<ul>
+<li>Usage becoming more widespread and more varied</li>
+<li>Entry point into web development</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="img/shiny.png"></p>
+</div>
+</div>
+<p><a href="https://shiny.rstudio.com/gallery/#user-showcase">Examples of Shiny apps</a></p>
+</section>
+<section id="what-is-uiux" class="slide level2">
+<h2>What is UI/UX?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="user-interface">User <em>Interface</em> 🎨</h3>
+<ul>
+<li>Visual design
+<ul>
+<li>Colours, fonts, layouts, images</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="user-experience">User <em>Experience</em> 🖱</h3>
+<ul>
+<li>Interaction design
+<ul>
+<li>Usability, accessiblity, user research &amp; testing</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<ul>
+<li><p>Difficult to separate as they both feed into each other</p></li>
+<li><p>Large fields in their own right</p>
+<ul>
+<li>I will try to cover some basic principles within the context of Shiny apps</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>You can’t design the colors, fonts, layouts, without thinking about a user interacting with them</li>
+<li>Equally, you can’t design the user experiencing without thinking about what the visual content they will interact with looks like</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="web-basics-front-end" class="slide level2">
+<h2>Web basics: front end</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>HTML: <strong>structure</strong></p></li>
+<li><p>CSS: <strong>style</strong></p></li>
+<li><p>JavaScript: <strong>interactivity</strong></p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="img/html_css_js.png"></p>
+</div>
+</div>
+<ul>
+<li><p>Shiny generates HTML, CSS, and JavaScript for you</p></li>
+<li><p>Can inspect the underlying web technologies using the Developer Tools in browser</p></li>
+</ul>
+</section>
+<section id="demo-a-simple-shiny-app" class="slide level2">
+<h2>🔧 Demo: A simple Shiny app 🔧</h2>
+<ul>
+<li>App that prints a random US state when you click a button</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(<span class="st">"shiny"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">actionButton</span>(<span class="st">"click"</span>, <span class="at">label =</span> <span class="st">"Click me!"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">textOutput</span>(<span class="st">"state"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>server <span class="ot">=</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  output<span class="sc">$</span>state <span class="ot">=</span> <span class="fu">renderText</span>(</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="fu">sample</span>(state.name, <span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="fu">bindEvent</span>(input<span class="sc">$</span>click)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Let’s look at HTML/CSS/JavaScript in Developer Tools</li>
+</ul>
+</section>
+<section id="uiux-design-principles" class="slide level2">
+<h2>UI/UX design principles</h2>
+<ol type="1">
+<li>Accessibility 🫂</li>
+<li>Feedback to the User ✅</li>
+<li>Help and Documentation 📜</li>
+<li>Responsive design 📱</li>
+<li>Hierarchy and Chronology 📑</li>
+<li>Less is More 🤏</li>
+</ol>
+</section>
+<section>
+<section id="accessibility" class="title-slide slide level1 center">
+<h1>1. Accessibility</h1>
+
+</section>
+<section id="accessiblity-on-the-web" class="slide level2">
+<h2>Accessiblity on the web</h2>
+<ul>
+<li>Ensuring there are <strong>no barriers that prevent interaction with or access to the content</strong> of your app</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Potential barriers:
+<ul>
+<li>Dyslexia, colorblindness, visual or hearing impairments, motor or cognitive impairments and more</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>You can improve:
+<ul>
+<li>Contrast, colour palettes, font sizes, screen reader compatibility, alternative text, not relying on mouse inputs, transcripts for audio, semantic HTML</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="footer topic-footer">
+<p>Accessibility</p>
+</div>
+</section>
+<section id="available-guidelines-tool" class="slide level2">
+<h2>Available guidelines &amp; tool</h2>
+<ul>
+<li><p><a href="https://www.w3.org/TR/WCAG20/">Web Content Accessibility Guidelines (WCAG)</a></p>
+<ul>
+<li>Currently WCAG 2, WCAG 3 is in progress</li>
+</ul></li>
+<li><p><a href="https://www.a11yproject.com/">A11Y</a></p>
+<ul>
+<li>Community-driven effort to make digital accessiblity easier</li>
+</ul></li>
+<li><p>Lighthouse report in Chrome Developer Tools</p></li>
+<li><p>WAVE evaluation browser extension</p></li>
+</ul>
+<div class="footer topic-footer">
+<p>Accessibility</p>
+</div>
+</section>
+<section id="demo-accessibility-tools" class="slide level2">
+<h2>🔧 Demo: Accessibility tools 🔧</h2>
+<p><img data-src="img/wave.png" class="absolute" style="top: 200px; left: 100px; width: 350px; height: 350px; "></p>
+<p><img data-src="img/lighthouse.svg" class="absolute" style="top: 220px; left: 600px; width: 320px; height: 320px; "></p>
+<div class="footer topic-footer">
+<p>Accessibility</p>
+</div>
+<aside class="notes">
+<p>Run Lighthouse report on A11Y website, and then WCAG website WCAG should result in one problem, lang code being wrong for Japan It’s set to “jp” but should be “ja” Correct language codes here: https://www.w3schools.com/tags/ref_language_codes.asp</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="accessibility-in-shiny" class="slide level2">
+<h2>Accessibility in Shiny 💻</h2>
+<ul>
+<li><p>You can run browser-based reports on Shiny apps</p></li>
+<li><p>Shiny generates HTML for you</p>
+<ul>
+<li>Modifying HTML directly is more difficult</li>
+</ul></li>
+<li><p><code>renderPlot</code> now has an <code>alt</code> argument for alternative text</p></li>
+<li><p>Colors, fonts, contrast etc. can all be modified using CSS</p></li>
+<li><p>R packages: <a href="https://github.com/ewenme/shinya11y">{shinya11y}</a>, <a href="https://github.com/ajrgodfrey/BrailleR">{BrailleR}</a>, <a href="https://rdrr.io/cran/sonify/man/sonify.html">{sonify}</a>, <a href="https://github.com/jooyoungseo/tactileR">{tactileR}</a></p></li>
+</ul>
+<div class="footer topic-footer">
+<p>Accessibility</p>
+</div>
+</section>
+<section id="demo-board-game-app" class="slide level2">
+<h2>🔧 Demo: Board game app 🔧</h2>
+<ol type="1">
+<li><p>Adding alt text</p></li>
+<li><p>Generating a Ligthouse report</p></li>
+<li><p>Fixing issues from Lighthouse report</p></li>
+</ol>
+
+<img data-src="img/app_screenshot.png" class="r-stretch"><div class="footer topic-footer">
+<p>Accessibility</p>
+</div>
+<aside class="notes">
+<ol type="1">
+<li><p><code>tags$img(src = data$thumbnail, alt = "Board game cover")</code></p></li>
+<li><p>Add <code>tags$html(lang = "en")</code> inside div &amp; change color of slider label in css</p></li>
+</ol>
+<pre><code>.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
+  background-color: #fff;
+  color: #262626;
+}</code></pre>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="feedback-to-the-user" class="title-slide slide level1 center">
+<h1>2. Feedback to the User</h1>
+
+</section>
+<section id="every-action-has-a-reaction" class="slide level2">
+<h2>Every action has a reaction</h2>
+<ul>
+<li>Feedback communicates the result of any interaction</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:45%;">
+<h3 id="process">Process</h3>
+<ul>
+<li>Process ongoing</li>
+<li>Correct/incorrect input</li>
+<li>Action has worked/failed</li>
+<li>Items are clickable</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<h3 id="example-feedback">Example feedback</h3>
+<ul>
+<li><em>Downloading…</em></li>
+<li><em>Enter a valid phone number</em></li>
+<li><em>Progress saved!</em></li>
+<li>Cursor and colour change</li>
+</ul>
+</div>
+</div>
+<ul>
+<li>Also: loading spinners, tooltips, progress bars</li>
+</ul>
+<p><img data-src="img/loading.gif" class="absolute" style="bottom: 50px; right: 120px; width: 80px; height: 80px; "></p>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="why-important" class="slide level2">
+<h2>Why important?</h2>
+<ul>
+<li><p>Lack of feedback leaves the user confused</p>
+<ul>
+<li>Might give up, refresh the whole page, keep clicking a button several times</li>
+</ul></li>
+<li><p>Feedback needs to be both <em>visible</em> and <em>understandable</em></p></li>
+<li><p>Response should be <em>proportional</em> to action</p>
+<ul>
+<li>Small action ➜ Small response
+<ul>
+<li>e.g.&nbsp;don’t need to say “Button clicked!”</li>
+</ul></li>
+</ul></li>
+</ul>
+<center>
+<div class="cell">
+<div class="cell-output-display">
+<p><button id="click-me" type="button" class="btn btn-default action-button" style="font-size: 40px; padding: 20px;">Click me</button></p>
+</div>
+</div>
+</center>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="in-shiny-built-in" class="slide level2">
+<h2>In Shiny: built-in</h2>
+<ul>
+<li><p>Buttons, links etc. already give sensible visual feedback (colour change) at clicking/hovering</p></li>
+<li><p>If e.g.&nbsp;plot fails, will send through R error message</p>
+<ul>
+<li>Can provide custom error message with <code>validate()</code></li>
+</ul></li>
+<li><p><code>showModal()</code> to display a pop-up modal</p></li>
+<li><p><code>withProgress()</code> to show progress bar</p></li>
+<li><p><code>showNotification()</code> to display a notification</p></li>
+</ul>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="in-shiny-add-ons" class="slide level2">
+<h2>In Shiny: add-ons</h2>
+<ul>
+<li><p><a href="https://github.com/daattali/shinycssloaders">{shinycssloaders}</a> to add loading spinners to individual elements</p></li>
+<li><p><a href="https://github.com/JohnCoene/waiter">{waiter}</a> to add loading screen for entire app</p></li>
+<li><p><a href="https://github.com/JohnCoene/tippy">{tippy}</a> to add tooltip pop-up message</p></li>
+</ul>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="shinycssloaders" class="slide level2">
+<h2>{shinycssloaders}</h2>
+<p><img data-src="img/shinycssloaders.gif" class="absolute" style="width: 70%; height: 80%; "></p>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="waiter" class="slide level2">
+<h2>{waiter}</h2>
+<p><img data-src="img/waiter.gif" class="absolute" style="width: 80%; height: 80%; "></p>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="tippy" class="slide level2">
+<h2>{tippy}</h2>
+<p><img data-src="img/rclipboard_tippy.gif" class="absolute" style="width: 70%; height: 80%; "></p>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section>
+<section id="demo-board-game-app-1" class="slide level2">
+<h2>🔧 Demo: Board game app 🔧</h2>
+<ol type="1">
+<li>Improving feedback when no games were found
+<ul>
+<li>Should prompt user to update search criteria</li>
+</ul></li>
+</ol>
+<center>
+<img data-src="img/error.png" style="width:50.0%">
+</center>
+<aside class="notes">
+<pre><code>validate(
+  need(nrow(filtered()) != 0, 
+  "No board games found! Please update your filters and try again.")
+)</code></pre>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="footer topic-footer">
+<p>Feedback to the User</p>
+</div>
+</section></section>
+<section>
+<section id="help-and-documentation" class="title-slide slide level1 center">
+<h1>3. Help and Documentation</h1>
+
+</section>
+<section id="getting-help" class="slide level2">
+<h2>Getting help</h2>
+<ul>
+<li><p>Users generally want to navigate a product without resorting to documentation</p></li>
+<li><p>Any help should be <strong>easy to locate</strong> and <strong>focused on the users’ current task</strong></p>
+<ul>
+<li><p>ℹ️ Where might your user get stuck?</p></li>
+<li><p>ℹ️ What questions might your user ask?</p></li>
+</ul></li>
+</ul>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+</section>
+<section id="basics" class="slide level2">
+<h2>Basics</h2>
+<ul>
+<li><p>Include a “Help” or “How to Use” tab</p></li>
+<li><p>Provide enough context for any included visualisations</p></li>
+<li><p>Consider who the user is, and what their knowledge of the subject/content will be</p></li>
+<li><p><strong>User testing</strong>: how does a user interact with the app</p>
+<ul>
+<li>If you can, get an actual end user</li>
+<li>If not, a colleague or friend might work</li>
+</ul></li>
+</ul>
+<p><img data-src="img/user_testing.png" class="absolute" style="bottom: 80px; right: 30px; width: 25%; "></p>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+</section>
+<section id="in-shiny-add-ons-1" class="slide level2">
+<h2>In Shiny: add-ons</h2>
+<ul>
+<li><p><a href="https://github.com/JohnCoene/cicerone">{cicerone}</a> to create guided tours of Shiny applications</p></li>
+<li><p><a href="https://github.com/cwthom/shinyhelper">{shinyhelper}</a> for adding help next to certain inputs</p></li>
+<li><p><a href="https://github.com/jienagu/faq">{faq}</a> to create a <em>Frequently Asked Questions</em> component</p></li>
+</ul>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+</section>
+<section id="cicerone" class="slide level2">
+<h2>{cicerone}</h2>
+<p><img data-src="img/cicerone.gif" class="absolute" style="width: 80%; height: 80%; "></p>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+</section>
+<section id="shinyhelper" class="slide level2">
+<h2>{shinyhelper}</h2>
+<p><img data-src="img/shinyhelper.gif" class="absolute" style="width: 100%; height: 80%; "></p>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+</section>
+<section id="faq" class="slide level2">
+<h2>{faq}</h2>
+<p><img data-src="img/faq.gif" class="absolute" style="width: 80%; height: 80%; "></p>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+</section>
+<section id="demo-board-game-app-2" class="slide level2">
+<h2>🔧 Demo: Board game app 🔧</h2>
+<ol type="1">
+<li>Adding {shinyhelper} help at “min. age input”</li>
+</ol>
+<center>
+<img data-src="img/min_age.png" style="width:40.0%">
+</center>
+<div class="footer topic-footer">
+<p>Help and Documentation</p>
+</div>
+<aside class="notes">
+<pre><code>%&gt;% helper(type = "inline",
+                      title = "Minimum age",
+                      content = c("Show only games that are suitable for someone who is x years old.",
+                                  "Default min. age is 25, which includes all board games"))</code></pre>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="responsive-design" class="title-slide slide level1 center">
+<h1>4. Responsive Design</h1>
+
+</section>
+<section id="what-is-responsive-design" class="slide level2">
+<h2>What is responsive design? 🖥️️💻️📱</h2>
+<ul>
+<li><p>Responsive web design is about creating web pages that look good <strong>on all devices</strong></p></li>
+<li><p>Users might be accessing your app with a <strong>laptop</strong>, a <strong>tablet</strong>, or their <strong>phone</strong></p></li>
+<li><p>A responsive web design will <strong>automatically adjust</strong> for different screen sizes and viewports</p></li>
+</ul>
+<div class="footer topic-footer">
+<p>Responsive Design</p>
+</div>
+</section>
+<section id="guidelines-and-tools" class="slide level2">
+<h2>Guidelines and tools</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>Developer tools allow you to view your web page with different dimensions and even specific devices
+<ul>
+<li>You can also try rotating the screen (as if you were rotating your phone screen) and zooming in on the device as well as use “touch screen”</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/screen_sizes.gif"></p>
+</div>
+</div>
+<div class="footer topic-footer">
+<p>Responsive Design</p>
+</div>
+</section>
+<section id="shiny-and-responsive-design" class="slide level2">
+<h2>Shiny and responsive design</h2>
+<ul>
+<li><p>Default layout <code>fluidPage</code> should resize with window</p></li>
+<li><p>Avoid hard coding widths and heights in centimetres or inches</p>
+<ul>
+<li>Instead use relative units e.g.&nbsp;percentages</li>
+</ul></li>
+</ul>
+<div class="footer topic-footer">
+<p>Responsive Design</p>
+</div>
+</section>
+<section id="mobile-compatibility-in-shiny" class="slide level2">
+<h2>Mobile compatibility in Shiny</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="https://rinterface.github.io/shinyMobile/">{shinyMobile}</a> <img data-src="img/shinymobile.gif" class="absolute" style="width: 25%; "></p>
+</div><div class="column" style="width:50%;">
+<p><a href="https://github.com/rstudio/miniUI">{miniUI}</a></p>
+<p><img data-src="img/mini_ui.gif" class="absolte" style="width:51.0%"></p>
+</div>
+</div>
+<div class="footer topic-footer">
+<p>Responsive Design</p>
+</div>
+</section>
+<section id="demo-board-game-app-3" class="slide level2">
+<h2>🔧 Demo: Board game app 🔧</h2>
+<ol type="1">
+<li>Try out different screen sizes in developer tools</li>
+</ol>
+<div class="footer topic-footer">
+<p>Responsive Design</p>
+</div>
+</section></section>
+<section>
+<section id="hierarchy-and-chronology" class="title-slide slide level1 center">
+<h1>5. Hierarchy and Chronology</h1>
+
+</section>
+<section id="structuring-your-content" class="slide level2">
+<h2>Structuring your content</h2>
+<ul>
+<li>Visual hierarchy is the order in which the user process information by importance
+<ul>
+<li>With the correct use of hierarchy, the mind can group and prioritize elements to give them a specific order</li>
+<li>If not placed through a correct hierarchy, generate disorder and greater effort in navigation</li>
+</ul></li>
+</ul>
+<div class="footer topic-footer">
+<p>Hierarchy and Chronology</p>
+</div>
+</section>
+<section id="where-to-look" class="slide level2">
+<h2>Where to look? 👀</h2>
+
+<img data-src="img/bad_landing_page.png" class="r-stretch"><div class="footer topic-footer">
+<p>Hierarchy and Chronology</p>
+</div>
+</section>
+<section id="components-to-create-hierarchy" class="slide level2">
+<h2>Components to create hierarchy</h2>
+<ul>
+<li><strong>Size</strong> ➕: The larger the element, the more it will attract attention</li>
+<li><strong>Colour</strong> 🎨: Bright colours stand out more than muted tones</li>
+<li><strong>Alignment</strong>️ 📏: Any element that separates from the alignment of the others will attract attention</li>
+<li><strong>Negative space</strong> ⬜: The more space around the element, the more attention it generates</li>
+</ul>
+<div class="footer topic-footer">
+<p>Hierarchy and Chronology</p>
+</div>
+</section>
+<section id="in-shiny" class="slide level2">
+<h2>In Shiny</h2>
+<ul>
+<li>Use h1-h5 headings effectively</li>
+<li>Structuring your content into sections/tabs to avoid all content on a single page
+<ul>
+<li>e.g.&nbsp;<code>navBarPage()</code></li>
+</ul></li>
+<li>Highlighting important outputs/inputs with size/color/position, and placing less important elements to the side/hidden unless requested</li>
+</ul>
+<p><img data-src="img/navbarpage.gif" class="absolute" style="top: 230px; right: 160px; width: 35%; "></p>
+<div class="footer topic-footer">
+<p>Hierarchy and Chronology</p>
+</div>
+</section>
+<section id="demo-board-game-app-4" class="slide level2">
+<h2>🔧 Demo: Board game app 🔧</h2>
+<ol type="1">
+<li>Distinguish the “Find board game” button from the “+ More options” button using size/colour</li>
+</ol>
+<center>
+<img data-src="img/buttons.png" style="width:30.0%">
+</center>
+<div class="footer topic-footer">
+<p>Hierarchy and Chronology</p>
+</div>
+</section></section>
+<section>
+<section id="less-is-more" class="title-slide slide level1 center">
+<h1>6. Less is More</h1>
+
+</section>
+<section id="reduce-complexity" class="slide level2">
+<h2>Reduce complexity</h2>
+<ul>
+<li>As you’re learning about a bunch of cool packages and features that you can add to your Shiny app, it’s easy to overdo it and end up adding features <em>just because</em></li>
+<li>The more you add, the more difficult your app will be to interact with for the user (<strong>increased cognitive load</strong>)
+<ul>
+<li>It may also slow down your app significantly!</li>
+</ul></li>
+</ul>
+<div class="footer topic-footer">
+<p>Less is More</p>
+</div>
+</section>
+<section id="keep-only-whats-essential" class="slide level2">
+<h2>Keep only what’s essential</h2>
+<ul>
+<li>What is essential for the usage of your app?
+<ul>
+<li>Make sure it is easy to perform those basic actions, before adding any other features</li>
+<li>You can use hierarchy/chronology to emphasise that basic user journey</li>
+</ul></li>
+</ul>
+<div class="footer topic-footer">
+<p>Less is More</p>
+</div>
+</section>
+<section id="in-shiny-1" class="slide level2">
+<h2>In Shiny</h2>
+<ul>
+<li>Avoid unnecessary interactivity
+<ul>
+<li>e.g.&nbsp;only use {plotly} when there’s a reason to</li>
+</ul></li>
+<li>Hide “advanced” inputs not necessary for basic use
+<ul>
+<li>e.g.&nbsp;extra filters when searching for a hotel room</li>
+</ul></li>
+</ul>
+<div class="footer topic-footer">
+<p>Less is More</p>
+</div>
+</section>
+<section id="demo-board-game-app-5" class="slide level2">
+<h2>🔧 Demo: Board game app 🔧</h2>
+<ol type="1">
+<li>Add min. age input into “+ More filters”</li>
+</ol>
+<div class="footer topic-footer">
+<p>Less is More</p>
+</div>
+</section>
+<section id="this-all-seems-too-much" class="slide level2">
+<h2>This all seems too much!</h2>
+<ul>
+<li><p>I wouldn’t worry about meeting all these principles from the get go</p></li>
+<li><p>Development is an iterative process, and you can always keep improving your app</p></li>
+<li><p>Also, to even worry about user interface and user experience, <em>you will need to have users first</em></p></li>
+</ul>
+</section></section>
+<section id="thank-you" class="title-slide slide level1 center">
+<h1>Thank you! 🌻</h1>
+<ul>
+<li><p><strong>Twitter:</strong> <span class="citation" data-cites="MandyNorrbo">@MandyNorrbo</span></p></li>
+<li><p><strong>LinkedIn:</strong> Mandy Norrbo</p></li>
+<li><p><strong>Email:</strong> mandy@jumpingrivers.com</p></li>
+</ul>
+
+<img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="slides_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>
