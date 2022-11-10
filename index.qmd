@@ -482,10 +482,18 @@ Help and Documentation
 
 ::: {.notes}
 ``` 
+in ui:
 %>% helper(type = "inline",
-                      title = "Minimum age",
-                      content = c("Show only games that are suitable for someone who is x years old.",
-                                  "Default min. age is 25, which includes all board games"))
+title = "Minimum age",
+content = c(
+"Show only games that are suitable for someone who is x years old.",
+"Default min. age is 25, which includes all board games"))
+
+in server:
+observe_helpers()
+
+in global:
+library("shinyhelper")
 ```
 
 :::
@@ -598,6 +606,16 @@ Hierarchy and Chronology
 
 ![](img/bad_landing_page.png)
 
+:::{.notes}
+
+- use of bright red color everywhere
+- no white space
+- a lot of text
+- no obvious place to start
+
+:::
+
+
 ::: {.footer .topic-footer}
 Hierarchy and Chronology
 :::
@@ -618,7 +636,7 @@ Hierarchy and Chronology
 - Use h1-h5 headings effectively
 - Structuring your content into sections/tabs to avoid all content on a single page
     - e.g. `navBarPage()`
-- Highlighting important outputs/inputs with size/color/position, and placing less important elements to the side/hidden unless requested
+- Highlighting important outputs/inputs with size/color/position
 
 ![](img/navbarpage.gif){.absolute right="160px" top="230px" width="35%"}
 
@@ -690,7 +708,7 @@ Less is More
 
 - Development is an iterative process, and you can always keep improving your app 
 
-- Also, to even worry about user interface and user experience, *you will need to have users first*
+- Also, to even worry about the user interface and user experience, *you will need to have users first!*
 
 # Thank you! 🌻
 

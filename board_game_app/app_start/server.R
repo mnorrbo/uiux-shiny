@@ -36,11 +36,6 @@ server = function(input, output, session) {
   
   output$recommended = renderUI({
     
-    validate(
-      need(nrow(filtered()) != 0, 
-          "No board games found! Please update your filters and try again.")
-    )
-    
     recommended = board_games %>%
       filter(name == top_game())
     

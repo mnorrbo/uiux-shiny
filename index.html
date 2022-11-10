@@ -898,10 +898,18 @@
 <p>Help and Documentation</p>
 </div>
 <aside class="notes">
-<pre><code>%&gt;% helper(type = "inline",
-                      title = "Minimum age",
-                      content = c("Show only games that are suitable for someone who is x years old.",
-                                  "Default min. age is 25, which includes all board games"))</code></pre>
+<pre><code>in ui:
+%&gt;% helper(type = "inline",
+title = "Minimum age",
+content = c(
+"Show only games that are suitable for someone who is x years old.",
+"Default min. age is 25, which includes all board games"))
+
+in server:
+observe_helpers()
+
+in global:
+library("shinyhelper")</code></pre>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1013,7 +1021,25 @@
 <section id="where-to-look" class="slide level2">
 <h2>Where to look? 👀</h2>
 
-<img data-src="img/bad_landing_page.png" class="r-stretch"><div class="footer topic-footer">
+<img data-src="img/bad_landing_page.png" class="r-stretch"><aside class="notes">
+<ul>
+<li>use of bright red color everywhere</li>
+<li>no white space</li>
+<li>a lot of text</li>
+<li>no obvious place to start</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="footer topic-footer">
 <p>Hierarchy and Chronology</p>
 </div>
 </section>
@@ -1037,7 +1063,7 @@
 <ul>
 <li>e.g.&nbsp;<code>navBarPage()</code></li>
 </ul></li>
-<li>Highlighting important outputs/inputs with size/color/position, and placing less important elements to the side/hidden unless requested</li>
+<li>Highlighting important outputs/inputs with size/color/position</li>
 </ul>
 <p><img data-src="img/navbarpage.gif" class="absolute" style="top: 230px; right: 160px; width: 35%; "></p>
 <div class="footer topic-footer">
@@ -1122,7 +1148,7 @@
 <ul>
 <li><p>Don’t worry about meeting all these principles from the get go</p></li>
 <li><p>Development is an iterative process, and you can always keep improving your app</p></li>
-<li><p>Also, to even worry about user interface and user experience, <em>you will need to have users first</em></p></li>
+<li><p>Also, to even worry about the user interface and user experience, <em>you will need to have users first!</em></p></li>
 </ul>
 </section></section>
 <section id="thank-you" class="title-slide slide level1 center">
