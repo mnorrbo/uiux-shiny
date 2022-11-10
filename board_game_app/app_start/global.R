@@ -55,7 +55,7 @@ recommendedUI = function(data, categories) {
     hr(),
     div(
       id = "rec-title",
-      tags$img(src = data$thumbnail, alt = "Board game cover"),
+      tags$img(src = data$thumbnail),
       h2(data$name)
     ),
     br(),
