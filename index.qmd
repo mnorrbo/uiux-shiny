@@ -700,4 +700,4 @@ Less is More
 
   - **GitHub:** mnorrbo
 
-  - **Email:** mandy@jumpingrivers.com
+  - **Slides:** mnorrbo.github.io/uiux-shiny
