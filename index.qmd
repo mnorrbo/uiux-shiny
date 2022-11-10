@@ -178,7 +178,7 @@ shinyApp(ui, server)
 Accessibility
 :::
 
-## Available guidelines & tool
+## Available guidelines & tools
 
 - [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/TR/WCAG20/)
   - Currently WCAG 2, WCAG 3 is in progress
