@@ -7,7 +7,6 @@ library("shinyhelper")
 board_games = readr::read_csv("data/board_games.csv",
                               show_col_types = FALSE)
 
-
 defaults = list(
   category = sort(unique(board_games$category)),
   players = list(

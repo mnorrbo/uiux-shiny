@@ -207,10 +207,7 @@ Accessibility
 
 
 ::: {.notes}
-Run Lighthouse report on A11Y website, and then WCAG website
-WCAG should result in one problem, lang code being wrong for Japan
-It's set to "jp" but should be "ja"
-Correct language codes here: https://www.w3schools.com/tags/ref_language_codes.asp
+Run Lighthouse report and WAVE evaluation on A11Y website
 :::
   
 
@@ -226,6 +223,14 @@ Correct language codes here: https://www.w3schools.com/tags/ref_language_codes.a
 - Colors, fonts, contrast etc. can all be modified using CSS
 
 - R packages: [{shinya11y}](https://github.com/ewenme/shinya11y), [{BrailleR}](https://github.com/ajrgodfrey/BrailleR), [{sonify}](https://rdrr.io/cran/sonify/man/sonify.html), [{tactileR}](https://github.com/jooyoungseo/tactileR)
+
+::: {.notes}
+
+{shinya11y} provides similar checks to lighthouse/wave but as an r package
+
+The rest are not necessarily shiny specific, but packages that make writing R code easier for those with accessibility needs
+
+:::
 
 ::: {.footer .topic-footer}
 Accessibility
@@ -246,16 +251,9 @@ Accessibility
 :::
 
 ::: {.notes}
-1. `tags$img(src = data$thumbnail, alt = "Board game cover")`
+1. `tags$img(src = data$thumbnail, alt = "Illustrated board game cover")`
 
-1. Add `tags$html(lang = "en")` inside div & change color of slider label in css
-    
-```
-.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
-  background-color: #fff;
-  color: #262626;
-}
-```
+1. Add `tags$html(lang = "en")` inside div
 :::
 
 

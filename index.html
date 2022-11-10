@@ -604,7 +604,7 @@
 <p>Accessibility</p>
 </div>
 <aside class="notes">
-<p>Run Lighthouse report on A11Y website, and then WCAG website WCAG should result in one problem, lang code being wrong for Japan It’s set to “jp” but should be “ja” Correct language codes here: https://www.w3schools.com/tags/ref_language_codes.asp</p>
+<p>Run Lighthouse report and WAVE evaluation on A11Y website</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -629,6 +629,20 @@
 <li><p>Colors, fonts, contrast etc. can all be modified using CSS</p></li>
 <li><p>R packages: <a href="https://github.com/ewenme/shinya11y">{shinya11y}</a>, <a href="https://github.com/ajrgodfrey/BrailleR">{BrailleR}</a>, <a href="https://rdrr.io/cran/sonify/man/sonify.html">{sonify}</a>, <a href="https://github.com/jooyoungseo/tactileR">{tactileR}</a></p></li>
 </ul>
+<aside class="notes">
+<p>{shinya11y} provides similar checks to lighthouse/wave but as an r package</p>
+<p>The rest are not necessarily shiny specific, but packages that make writing R code easier for those with accessibility needs</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="footer topic-footer">
 <p>Accessibility</p>
 </div>
@@ -646,13 +660,9 @@
 </div>
 <aside class="notes">
 <ol type="1">
-<li><p><code>tags$img(src = data$thumbnail, alt = "Board game cover")</code></p></li>
-<li><p>Add <code>tags$html(lang = "en")</code> inside div &amp; change color of slider label in css</p></li>
+<li><p><code>tags$img(src = data$thumbnail, alt = "Illustrated board game cover")</code></p></li>
+<li><p>Add <code>tags$html(lang = "en")</code> inside div</p></li>
 </ol>
-<pre><code>.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
-  background-color: #fff;
-  color: #262626;
-}</code></pre>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
